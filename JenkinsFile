@@ -1,6 +1,6 @@
 node {
     // Git checkout before load source the file
-    checkout scm
+    // checkout scm
 
     // To know files are checked out or not
     sh '''
@@ -11,7 +11,7 @@ node {
     println("Current Directory: " + rootDir)
 
     // point to exact source file
-    def example = load "${rootDir}/Example.Groovy"
+    def example = load "${rootDir}/Example.groovy"
 
     example.exampleMethod()
     example.otherExampleMethod()
