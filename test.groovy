@@ -90,7 +90,7 @@ static def getDirList() {
 
     def dirlist = []
 
-    new File("/home/vsavko/supertest/API_TEST").eachDirRecurse() { file ->
+    new File("/var/jenkins_home/workspace/pipeline/API_TEST").eachDirRecurse() { file ->
         dirlist << file.getAbsolutePath()
     }//println(dirlist)
 
