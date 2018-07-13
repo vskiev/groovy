@@ -2,14 +2,14 @@ import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
 
-// def rootDirPatch = "${rootDir}/src/API_TEST"
+def rootDirPatch = "/home/vsavko/Documents/dev/test2/src/API_TEST"
 // def currentDir = new File("").getCanonicalPath()
 // def APIRootDir = currentDir + File.separator + "src" + File.separator + "API_TEST" + File.separator
 
 def getInitLinks() {
     def lst = []
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("rootDirPatch").eachFile() { file ->
+        pathName = "rootDirPatch/" + file.getName()
         // Read the context of 'init' file
         fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
@@ -19,8 +19,8 @@ return lst
 }
 
 def getInputContent() {
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("rootDirPatch").eachFile() { file ->
+        pathName = "rootDirPatch/" + file.getName()
         return new JsonSlurper().parseText(new File(pathName + "/input.json").getText("UTF-8"))
     }
 }
@@ -112,8 +112,8 @@ def compareJsons(String url, String filePatch)
 
 def step2()
 {
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("rootDirPatch").eachFile() { file ->
+        pathName = "rootDirPatch/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists())
         {
             println(pathName)
@@ -138,8 +138,8 @@ def step2()
 
 def step3()
 {
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("rootDirPatch").eachFile() { file ->
+        pathName = "rootDirPatch/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
         new File(pathName + "/output.json").exists())
         {
