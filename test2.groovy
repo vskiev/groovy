@@ -8,8 +8,8 @@ def rootDirPatch = "/home/vsavko/Documents/dev/test2/src/API_TEST"
 
 def getInitLinks() {
     def lst = []
-    new File("rootDirPatch").eachFile() { file ->
-        pathName = "rootDirPatch/" + file.getName()
+    new File(rootDirPatch).eachFile() { file ->
+        pathName = rootDirPatch/ + file.getName()
         // Read the context of 'init' file
         fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
@@ -19,8 +19,8 @@ return lst
 }
 
 def getInputContent() {
-    new File("rootDirPatch").eachFile() { file ->
-        pathName = "rootDirPatch/" + file.getName()
+    new File(rootDirPatch).eachFile() { file ->
+        pathName = rootDirPatch/ + file.getName()
         return new JsonSlurper().parseText(new File(pathName + "/input.json").getText("UTF-8"))
     }
 }
@@ -112,8 +112,8 @@ def compareJsons(String url, String filePatch)
 
 def step2()
 {
-    new File("rootDirPatch").eachFile() { file ->
-        pathName = "rootDirPatch/" + file.getName()
+    new File(rootDirPatch).eachFile() { file ->
+        pathName = rootDirPatch/ + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists())
         {
             println(pathName)
@@ -138,8 +138,8 @@ def step2()
 
 def step3()
 {
-    new File("rootDirPatch").eachFile() { file ->
-        pathName = "rootDirPatch/" + file.getName()
+    new File(rootDirPatch).eachFile() { file ->
+        pathName = rootDirPatch/ + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
         new File(pathName + "/output.json").exists())
         {
