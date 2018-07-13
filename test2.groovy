@@ -2,7 +2,7 @@ import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
 
-def rootDirPatch = "/var/jenkins_home/workspace/pipeline"
+def rootDirPatch = "/var/jenkins_home/workspace/pipeline/"
 def currentDir = new File("").getCanonicalPath()
 def APIRootDir = currentDir + File.separator + "src" + File.separator + "API_TEST" + File.separator
 
