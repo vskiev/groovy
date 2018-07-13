@@ -8,8 +8,8 @@ def APIRootDir = currentDir + File.separator + "src" + File.separator + "API_TES
 
 def getInitLinks() {
     def lst = []
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("API_TEST").eachFile() { file ->
+        pathName = "API_TEST/" + file.getName()
         // Read the context of 'init' file
         fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
@@ -19,8 +19,8 @@ return lst
 }
 
 def getInputContent() {
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("API_TEST").eachFile() { file ->
+        pathName = "API_TEST/" + file.getName()
         return new JsonSlurper().parseText(new File(pathName + "/input.json").getText("UTF-8"))
     }
 }
@@ -112,8 +112,8 @@ def compareJsons(String url, String filePatch)
 
 def step2()
 {
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("API_TEST").eachFile() { file ->
+        pathName = "API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists())
         {
             println(pathName)
@@ -138,8 +138,8 @@ def step2()
 
 def step3()
 {
-    new File("src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("API_TEST").eachFile() { file ->
+        pathName = "API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
         new File(pathName + "/output.json").exists())
         {
