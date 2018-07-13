@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
