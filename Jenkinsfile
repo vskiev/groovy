@@ -17,7 +17,8 @@ node {
     //example.exampleMethod()
     //example.otherExampleMethod()
 
-      def test = load "${rootDir}/test.groovy"
-          test.getDirFiles()
-    
+      def test = load "${rootDir}/test2.groovy"
+          test.step1()
+        //   test.step2()
+        //   test.step3()
 }
