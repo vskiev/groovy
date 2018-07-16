@@ -19,6 +19,6 @@ node {
 
       def test = load "${WORKSPACE}/test2.groovy"
           test.step1()
-        //   test.step2()
-        //   test.step3()
+          test.step2()
+          test.step3()
 }
