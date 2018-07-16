@@ -9,8 +9,8 @@ import groovy.json.JsonSlurper
 
 def getInitLinks() {
     def lst = []
-    new File("/var/lib/jenkins/workspace/test/src/API_TEST").eachFile() { file ->
-        pathName = "./src/API_TEST/" + file.getName()
+    new File("/var/lib/jenkins/workspace/test/src/API_TEST/").eachFile() { file ->
+        pathName = "/var/lib/jenkins/workspace/test/src/API_TEST/" + file.getName()
         // Read the context of 'init' file
         fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
