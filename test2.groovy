@@ -11,7 +11,6 @@ def getInitLinks() {
     def lst = []
     new File("/var/lib/jenkins/workspace/test/src/API_TEST/").eachFile() { file ->
         pathName = "/var/lib/jenkins/workspace/test/src/API_TEST/" + file.getName()
-        // Read the context of 'init' file
         fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
     }
@@ -31,12 +30,8 @@ def step1() {
     for (int i = 0; i < links.size(); i++) {
         def get = new URL((String) links.get(i)).openConnection()
         def getRC = get.getResponseCode()
-//         println(getRC); //responce code
 
         if (getRC.equals(200)) {
-//             def JsonSlurper = new JsonSlurper()
-//             def object = JsonSlurper.parseText(get.getInputStream().getText());
-//             println(object);
             println("Link OK " + "in test " + i + " " + links.get(i))
         } else {
             println("Link NOT OK " + "in test " + i + " " + links.get(i))
@@ -112,7 +107,6 @@ def step2() {
             println(pathName)
             def link = new File(pathName + "/init").text
             def filepatch = pathName + "/input.json"
-//            println("inputJsonFilePatch " + filepatch)
             def status = compareJsons(link, filepatch)
             if (status) {
                 println("json valid in STEP 2 by patch: " + pathName)
@@ -137,7 +131,6 @@ def step3() {
             def inputpatch = pathName + "/input.json"
             def outputpatch = new File(pathName + "/output.json").text
             println("3 files are present")
-//            println("inputJsonFilePatch " + filepatch)
             def status = compareJsons(link, inputpatch)
             if (status) {
                 println("json valid on STEP 3 by patch: " + pathName)
