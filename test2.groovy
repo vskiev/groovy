@@ -13,7 +13,7 @@ def str =
 
 
 
-def getInitLinks() {
+ getInitLinks() {
     def lst = []
     new File("./src/API_TEST").eachFile() { file ->
         pathName = "./src/API_TEST/" + file.getName()
