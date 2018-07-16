@@ -1,28 +1,22 @@
 #!/usr/bin/env groovy
-
 import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
 
-def rootDirPatch = "/home/vsavko/supertest3/API_TEST"
-String currentDir = new File("").getCanonicalPath()
-def APIRootDir = currentDir + File.separator
-def str = 
+def rootDirPatch = "/home/vsavko/Documents/dev/test2/src/API_TEST"
+def currentDir = new File("").getCanonicalPath()
+def APIRootDir = currentDir + File.separator + "src" + File.separator + "API_TEST" + File.separator
 
-
-
-
-
- getInitLinks() {
+def getInitLinks() {
     def lst = []
     new File("./src/API_TEST").eachFile() { file ->
         pathName = "./src/API_TEST/" + file.getName()
         // Read the context of 'init' file
-        fileContent = new File(${currentDir} + pathName + "/init").getText()
+        fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
     }
 
-return lst
+    return lst
 }
 
 def getInputContent() {
@@ -34,23 +28,22 @@ def getInputContent() {
 
 def step1() {
     def links = getInitLinks()
-     for (int i = 0; i <links.size() ; i++) {
-         def get = new URL((String)links.get(i)).openConnection()
-         def getRC = get.getResponseCode()
+    for (int i = 0; i < links.size(); i++) {
+        def get = new URL((String) links.get(i)).openConnection()
+        def getRC = get.getResponseCode()
 //         println(getRC); //responce code
 
-         if (getRC.equals(200))  {
+        if (getRC.equals(200)) {
 //             def JsonSlurper = new JsonSlurper()
 //             def object = JsonSlurper.parseText(get.getInputStream().getText());
 //             println(object);
-             println("Link OK " + "in test " + i +" "+ links.get(i))
-         }else
-         {
-             println("Link NOT OK " + "in test " + i +" "+ links.get(i))
-         }
+            println("Link OK " + "in test " + i + " " + links.get(i))
+        } else {
+            println("Link NOT OK " + "in test " + i + " " + links.get(i))
+        }
 
-     }
- }
+    }
+}
 
 def fileExist(String path) {
     def filePath = path
@@ -74,8 +67,7 @@ def fileExist(String path) {
 }
 
 
-def Post(String url, String message)
-{
+def Post(String url, String message) {
     def post = new URL(url).openConnection();
 //    message = '{"message":"this is a message"}'
     post.setRequestMethod("POST")
@@ -84,32 +76,28 @@ def Post(String url, String message)
     post.getOutputStream().write(message.getBytes("UTF-8"));
     def postRC = post.getResponseCode();
     println(postRC);
-    if(postRC.equals(200)) {
+    if (postRC.equals(200)) {
         println(post.getInputStream().getText())
     }
-    if(postRC.equals(201)) {
+    if (postRC.equals(201)) {
         println(post.getInputStream().getText())
     }
 
 }
 
 
-
-def compareJsons(String url, String filePatch)
-{
+def compareJsons(String url, String filePatch) {
     def get = new URL(url).openConnection()
     def getRC = get.getResponseCode()
-    if (getRC.equals(200))  {
+    if (getRC.equals(200)) {
         def JsonSlurper = new JsonSlurper()
         def map1 = JsonSlurper.parseText(get.getInputStream().getText())
         def map2 = JsonSlurper.parseText(new File(filePatch).text)
 
-        if(map1 == map2)
-        {
+        if (map1 == map2) {
             println("jsons are valid ")
             return true
-        }else
-        {
+        } else {
             print("jsons NOT valid")
             return false
         }
@@ -117,53 +105,45 @@ def compareJsons(String url, String filePatch)
 }
 
 
-def step2()
-{
+def step2() {
     new File("./src/API_TEST").eachFile() { file ->
-        pathName ="./src/API_TEST/" + file.getName()
-        if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists())
-        {
+        pathName = "./src/API_TEST/" + file.getName()
+        if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists()) {
             println(pathName)
             def link = new File(pathName + "/init").text
             def filepatch = pathName + "/input.json"
 //            println("inputJsonFilePatch " + filepatch)
-             def status= compareJsons(link,filepatch)
-                 if (status)
-                 {
-                     println("json valid in STEP 2 by patch: " + pathName )
+            def status = compareJsons(link, filepatch)
+            if (status) {
+                println("json valid in STEP 2 by patch: " + pathName)
 
-                 }else
-                 {
-                     println("json NOT valid in STEP 2 by patch: " + pathName)
-                 }
-                 println(status)
+            } else {
+                println("json NOT valid in STEP 2 by patch: " + pathName)
+            }
+            println(status)
 
         }
     }
 }
 
 
-def step3()
-{
+def step3() {
     new File("./src/API_TEST").eachFile() { file ->
         pathName = "./src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
-        new File(pathName + "/output.json").exists())
-        {
+                new File(pathName + "/output.json").exists()) {
             println(pathName)
             def link = new File(pathName + "/init").text
             def inputpatch = pathName + "/input.json"
             def outputpatch = new File(pathName + "/output.json").text
             println("3 files are present")
 //            println("inputJsonFilePatch " + filepatch)
-            def status= compareJsons(link,inputpatch)
-            if (status)
-            {
-                println("json valid on STEP 3 by patch: " + pathName )
+            def status = compareJsons(link, inputpatch)
+            if (status) {
+                println("json valid on STEP 3 by patch: " + pathName)
                 println("posting json")
-                Post(link,outputpatch)
-            }else
-            {
+                Post(link, outputpatch)
+            } else {
                 println("json NOT valid in STEP 3 by patch: " + pathName)
                 println("json posting SKIPPED")
             }
@@ -173,6 +153,7 @@ def step3()
     }
 
 }
+
 
 
 
