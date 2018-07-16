@@ -19,6 +19,11 @@ node {
 
       def test = load "${WORKSPACE}/test2.groovy"
           test.step1()
-          test.step2()
-          test.step3()
+
+
+      def test2 = load "${WORKSPACE}/test2.groovy"          
+          test2.step2()
+
+      def test3 = load "${WORKSPACE}/test2.groovy"    
+          test3.step3()
 }
