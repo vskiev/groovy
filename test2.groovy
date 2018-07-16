@@ -5,8 +5,9 @@ import groovy.json.JsonSlurper
 
 
 def rootDirPatch = "/home/vsavko/supertest3/API_TEST"
-def currentDir = new File("").getCanonicalPath()
+String currentDir = new File("").getCanonicalPath()
 def APIRootDir = currentDir + File.separator
+def str = 
 
 
 
@@ -14,8 +15,8 @@ def APIRootDir = currentDir + File.separator
 
 def getInitLinks() {
     def lst = []
-    new File("${currentDir}" + "src/API_TEST").eachFile() { file ->
-        pathName = "src/API_TEST/" + file.getName()
+    new File("./src/API_TEST").eachFile() { file ->
+        pathName = "./src/API_TEST/" + file.getName()
         // Read the context of 'init' file
         fileContent = new File(${currentDir} + pathName + "/init").getText()
         lst.add(fileContent)
@@ -25,8 +26,8 @@ return lst
 }
 
 def getInputContent() {
-    new File("${currentDir}" + "src/API_TEST").eachFile() { file ->
-        pathName = "${currentDir}" + "src/API_TEST/" + file.getName()
+    new File("./src/API_TEST").eachFile() { file ->
+        pathName = "./src/API_TEST/" + file.getName()
         return new JsonSlurper().parseText(new File(pathName + "/input.json").getText("UTF-8"))
     }
 }
@@ -118,8 +119,8 @@ def compareJsons(String url, String filePatch)
 
 def step2()
 {
-    new File("${currentDir}" + "src/API_TEST").eachFile() { file ->
-        pathName ="${currentDir}" + "src/API_TEST/" + file.getName()
+    new File("./src/API_TEST").eachFile() { file ->
+        pathName ="./src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists())
         {
             println(pathName)
@@ -144,8 +145,8 @@ def step2()
 
 def step3()
 {
-    new File("${currentDir}" + "src/API_TEST").eachFile() { file ->
-        pathName ="${currentDir}" + "src/API_TEST/" + file.getName()
+    new File("./src/API_TEST").eachFile() { file ->
+        pathName = "./src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
         new File(pathName + "/output.json").exists())
         {
