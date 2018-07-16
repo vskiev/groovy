@@ -142,17 +142,10 @@ def step3() {
 
 }
 
-
-
-
-
 step1()
-
 
 step2()
 
-
 step3()
-
 
 return this
