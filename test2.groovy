@@ -1,16 +1,17 @@
 #!/usr/bin/env groovy
+
 import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
 
-def rootDirPatch = "/var/jenkins_home/workspace/pipeline/src/API_TEST"
-// def currentDir = new File("").getCanonicalPath()
-// def APIRootDir = currentDir + File.separator + "src" + File.separator + "API_TEST" + File.separator
+def rootDirPatch = "/home/vsavko/supertest3/API_TEST"
+def currentDir = new File("").getCanonicalPath()
+def APIRootDir = currentDir + File.separator + "src" + File.separator + "API_TEST" + File.separator
 
 def getInitLinks() {
     def lst = []
-    new File(rootDirPatch).eachFile() { file ->
-        pathName = rootDirPatch/ + file.getName()
+    new File("src/API_TEST").eachFile() { file ->
+        pathName = "src/API_TEST/" + file.getName()
         // Read the context of 'init' file
         fileContent = new File(pathName + "/init").getText()
         lst.add(fileContent)
@@ -20,8 +21,8 @@ return lst
 }
 
 def getInputContent() {
-    new File(rootDirPatch).eachFile() { file ->
-        pathName = rootDirPatch/ + file.getName()
+    new File("src/API_TEST").eachFile() { file ->
+        pathName = "src/API_TEST/" + file.getName()
         return new JsonSlurper().parseText(new File(pathName + "/input.json").getText("UTF-8"))
     }
 }
@@ -29,7 +30,7 @@ def getInputContent() {
 def step1() {
     def links = getInitLinks()
      for (int i = 0; i <links.size() ; i++) {
-         def get = new URL(links.get(i)).openConnection()
+         def get = new URL((String)links.get(i)).openConnection()
          def getRC = get.getResponseCode()
 //         println(getRC); //responce code
 
@@ -71,7 +72,7 @@ def fileExist(String path) {
 def Post(String url, String message)
 {
     def post = new URL(url).openConnection();
-    message = '{"message":"this is a message"}'
+//    message = '{"message":"this is a message"}'
     post.setRequestMethod("POST")
     post.setDoOutput(true)
     post.setRequestProperty("Content-Type", "application/json")
@@ -113,8 +114,8 @@ def compareJsons(String url, String filePatch)
 
 def step2()
 {
-    new File(rootDirPatch).eachFile() { file ->
-        pathName = rootDirPatch/ + file.getName()
+    new File("src/API_TEST").eachFile() { file ->
+        pathName = "src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists())
         {
             println(pathName)
@@ -139,8 +140,8 @@ def step2()
 
 def step3()
 {
-    new File(rootDirPatch).eachFile() { file ->
-        pathName = rootDirPatch/ + file.getName()
+    new File("src/API_TEST").eachFile() { file ->
+        pathName = "src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
         new File(pathName + "/output.json").exists())
         {
