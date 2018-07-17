@@ -191,7 +191,7 @@ step3()
 
 
 def ret(){
-def rr = new Result()
+// def rr = new Result()
 rr.resultADD(1, "true")
 rr.resultADD(2, "true")
 rr.resultADD(3, "true")
