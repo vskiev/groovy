@@ -15,7 +15,7 @@ node {
         test.step1()
         test.step2()
         test.step3()
-        test.getAlldata()
+      
        
 
 

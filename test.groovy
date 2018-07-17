@@ -28,12 +28,10 @@ class Result {
     def boolean testPass() {
         for (r in resultSet) {
             def data = r.getValue()
-            if (data == "true") {
-//                println("we are true")
+            if (data == "true") {e
                 setMresultTrue()
 
             } else {
-//                println(" in false")
                 setMresultFalse()
                 break
             }
@@ -42,7 +40,6 @@ class Result {
      return mResult
     }
 }
-
 
 
 def getInitLinks() {
@@ -63,7 +60,7 @@ def getInputContent() {
     }
 }
 
-def step1() {
+def boolean step1() {
     def links = getInitLinks()
     for (int i = 0; i < links.size(); i++) {
         def get = new URL((String) links.get(i)).openConnection()
@@ -71,6 +68,7 @@ def step1() {
 
         if (getRC.equals(200)) {
             println("Link OK " + "in test " + i + " " + links.get(i))
+
         } else {
             println("Link NOT OK " + "in test " + i + " " + links.get(i))
         }
@@ -138,7 +136,7 @@ def compareJsons(String url, String filePatch) {
 }
 
 
-def step2() {
+def boolean step2() {
     new File("${WORKSPACE}/src/API_TEST").eachFile() { file ->
         pathName = "${WORKSPACE}/src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists()) {
@@ -147,10 +145,12 @@ def step2() {
             def filepatch = pathName + "/input.json"
             def status = compareJsons(link, filepatch)
             if (status) {
+                
                 println("json valid in STEP 2 by patch: " + pathName)
-
+                return true
             } else {
                 println("json NOT valid in STEP 2 by patch: " + pathName)
+            return false
             }
             println(status)
 
@@ -159,7 +159,7 @@ def step2() {
 }
 
 
-def step3() {
+def boolean step3() {
     new File("${WORKSPACE}/src/API_TEST").eachFile() { file ->
         pathName = "${WORKSPACE}/src/API_TEST/" + file.getName()
         if (new File(pathName + "/init").exists() && new File(pathName + "/input.json").exists() &&
@@ -174,11 +174,13 @@ def step3() {
                 println("json valid on STEP 3 by patch: " + pathName)
                 println("posting json")
                 Post(link, outputpatch)
+                return true
             } else {
                 println("json NOT valid in STEP 3 by patch: " + pathName)
                 println("json posting SKIPPED")
             }
-            println(status)
+            // println(status)
+              return false
 
         }
     }
