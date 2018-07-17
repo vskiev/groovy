@@ -12,9 +12,9 @@ node {
 
 
       def test = load "${WORKSPACE}/test.groovy"
-        //   test.step1()
-        //   test.getAlldata()
-        //   test.getmainresult()
+        test.step1()
+        test.getAlldata()
+        test.getmainresult()
 
 
           
