@@ -210,8 +210,8 @@ rr.resultADD(4, "true")
 
 def alldata = rr.getAllResults()
 def mainResolv = rr.testPass()
-println(alldata)
-println(mainResolv)
+// println(alldata)
+// println(mainResolv)
 
 
 
