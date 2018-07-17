@@ -16,6 +16,5 @@ node {
 
 
        def testResult = load "${WORKSPACE}/test.groovy"
-           testResult.getAllresults()
-           testResult.testPass()
+           testResult.ret()
 }
