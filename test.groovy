@@ -2,6 +2,47 @@
 import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
+class Result {
+    boolean mResult = false
+    def resultSet = [:]
+
+    def resultADD(int testNumber, String result) {
+        resultSet.put(testNumber, result)
+    }
+
+    def String getAllResults() {
+        return resultSet.toMapString()
+    }
+
+
+    def setMresultTrue()
+    {
+        mResult = true
+    }
+
+    def setMresultFalse()
+    {
+        mResult = false
+    }
+
+    def boolean testPass() {
+        for (r in resultSet) {
+            def data = r.getValue()
+            if (data == "true") {
+//                println("we are true")
+                setMresultTrue()
+
+            } else {
+//                println(" in false")
+                setMresultFalse()
+                break
+            }
+        }
+
+     return mResult
+    }
+}
+
 def getInitLinks() {
     def lst = []
     new File("${WORKSPACE}/src/API_TEST/").eachFile() { file ->
@@ -147,5 +188,13 @@ step1()
 step2()
 
 step3()
+def rr = new Result()
+rr.resultADD(1, "true")
+rr.resultADD(2, "true")
+rr.resultADD(3, "true")
+rr.resultADD(4, "true")
+
+println(rr.getAllResults())
+println(rr.testPass())
 
 return this
