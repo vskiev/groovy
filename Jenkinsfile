@@ -15,8 +15,6 @@ node {
           test.step1()
 
 
-        def testResult = load "${WORKSPACE}/test.groovy"
-            testResult.getAlldata()
           
 
 
