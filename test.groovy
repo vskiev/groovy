@@ -41,6 +41,7 @@ class Result {
     }
 }
 
+def rr = new Result()
 
 def getInitLinks() {
     def lst = []
@@ -65,7 +66,7 @@ def boolean step1() {
     for (int i = 0; i < links.size(); i++) {
         def get = new URL((String) links.get(i)).openConnection()
         def getRC = get.getResponseCode()
-
+    
         if (getRC.equals(200)) {
             println("Link OK " + "in test " + i + " " + links.get(i))
 
@@ -210,8 +211,8 @@ def getmainresult()
 // rr.resultADD(3, "true")
 // rr.resultADD(4, "true")
 
-def alldata = rr.getAllResults()
-def mainResolv = rr.testPass()
+// def alldata = rr.getAllResults()
+// def mainResolv = rr.testPass()
 // println(alldata)
 // println(mainResolv)
 
