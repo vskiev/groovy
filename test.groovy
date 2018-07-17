@@ -202,11 +202,11 @@ def getmainresult()
 // step3()
 
 
-def rr = new Result()
-rr.resultADD(1, "true")
-rr.resultADD(2, "true")
-rr.resultADD(3, "true")
-rr.resultADD(4, "true")
+// def rr = new Result()
+// rr.resultADD(1, "true")
+// rr.resultADD(2, "true")
+// rr.resultADD(3, "true")
+// rr.resultADD(4, "true")
 
 def alldata = rr.getAllResults()
 def mainResolv = rr.testPass()
