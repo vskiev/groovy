@@ -11,12 +11,11 @@ node {
     println("Current Directory: " + rootDir)
 
 
-      def test = load "${WORKSPACE}/test2.groovy"
+      def test = load "${WORKSPACE}/test.groovy"
           test.step1()
 
-      def test2 = load "${WORKSPACE}/test2.groovy"          
-          test2.step2()
 
-      def test3 = load "${WORKSPACE}/test2.groovy"    
-          test3.step3()
+       def testResult = load "${WORKSPACE}/test.groovy"
+           testResult.getAllresults()
+           testResult.testPass()
 }
