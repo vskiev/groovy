@@ -43,6 +43,8 @@ class Result {
     }
 }
 
+
+
 def getInitLinks() {
     def lst = []
     new File("${WORKSPACE}/src/API_TEST/").eachFile() { file ->
@@ -183,6 +185,16 @@ def step3() {
 
 }
 
+def getAlldata()
+{
+    return alldata
+}
+
+def getmainresult()
+{
+   return getmainresult()    
+}
+
 step1()
 
 step2()
@@ -190,14 +202,17 @@ step2()
 step3()
 
 
-def ret(){
-// def rr = new Result()
+def rr = new Result()
 rr.resultADD(1, "true")
 rr.resultADD(2, "true")
 rr.resultADD(3, "true")
 rr.resultADD(4, "true")
-println(rr.getAllResults())
-println(rr.testPass())
+
+def alldata = rr.getAllResults()
+def mainResolv = rr.testPass()
+println(alldata)
+println(mainResolv)
+
 
 }
 

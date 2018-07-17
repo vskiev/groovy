@@ -18,7 +18,6 @@ node {
     //    def testResult = load "${WORKSPACE}/test.groovy"
     //        testResult.ret()
           
-       def aa = load "${WORKSPACE}/test.groovy"
-       aa.resultADD(1, "true")
+
 
 }          
